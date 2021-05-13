@@ -6,12 +6,13 @@ using UnityEngine;
 public class CounterPresenter_A : MonoBehaviour
 {
     private CounterModel_A model;
-    private CounterView_A  view;
+    [SerializeField] private CounterView_A  view;
     // Start is called before the first frame update
     void Start()
     {
         model = new CounterModel_A();
-        if (null == view) FindObjectOfType<CounterView_A>();
+        // NullCheck for carelessness.
+        if (null == view) view = FindObjectOfType<CounterView_A>();
 
         // Browse to the view. 
         view
@@ -34,7 +35,7 @@ public class CounterPresenter_A : MonoBehaviour
             // When change in the count value.
             .Counter
             // Notify the view of numerical changes. 
-            .Subscribe(_ => view.DisplayCount(1))
+            .Subscribe(_ => view.DisplayCount(model.Counter.Value))
             .AddTo(this);
     }
 

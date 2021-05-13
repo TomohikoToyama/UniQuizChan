@@ -28,9 +28,9 @@ public class CounterView_A : MonoBehaviour
     void Start()
     {
         // NullCheck for carelessness.
-        if (null == _addButton) GameObject.Find(UIName.AddButton.ToString()).GetComponent<Button>();
-        if( null == _reduceButton)GameObject.Find(UIName.ReduceButton.ToString()).GetComponent<Button>();
-        if( null == _counterText)GameObject.Find(UIName.CounterText.ToString()).GetComponent<Text>();
+        if (null == _addButton)  _addButton =GameObject.Find(UIName.AddButton.ToString()).GetComponent<Button>();
+        if( null == _reduceButton) _reduceButton = GameObject.Find(UIName.ReduceButton.ToString()).GetComponent<Button>();
+        if( null == _counterText) _counterText =GameObject.Find(UIName.CounterText.ToString()).GetComponent<Text>();
         
         // Browse to the Addbutton
         _addButton
