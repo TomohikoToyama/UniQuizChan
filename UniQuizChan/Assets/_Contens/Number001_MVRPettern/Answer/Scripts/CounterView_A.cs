@@ -55,6 +55,6 @@ public class CounterView_A : MonoBehaviour
     /// <param name="count"></param>
     public void DisplayCount(int count)
     {
-        _counterText.text = "Current value is：" + count;
+        _counterText.text = "Current value is : " + count;
     }
 }
