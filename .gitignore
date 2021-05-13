@@ -58,3 +58,14 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+UniQuizChan/Assets/UniTask/
+UniQuizChan/Assets/Plugins/
+UniQuizChan/.idea/
+UniQuizChan/ProjectSettings/
+UniQuizChan/Packages/
+UniQuizChan/Temp/
+UniQuizChan/Logs/
+UniQuizChan/obj/
+UniQuizChan/Library/
+UniQuizChan/Assets/UniTask.meta
+UniQuizChan/Assets/Plugins.meta
