@@ -19,8 +19,8 @@ public class CounterView_A : MonoBehaviour
         CounterText
     }
     
-    public  IObserver<Unit> AddObservable()    => addTrigger; 
-    public  IObserver<Unit> ReduceObservable() => reduceTrigger; 
+    public  IObservable<Unit> AddObservable()    => addTrigger; 
+    public  IObservable<Unit> ReduceObservable() => reduceTrigger; 
     private Subject<Unit>   addTrigger    = new Subject<Unit>();
     private Subject<Unit>   reduceTrigger = new Subject<Unit>();
    
