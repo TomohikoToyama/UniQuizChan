@@ -36,7 +36,7 @@ public class MouseSlash_A : MonoBehaviour
        
         _cubeController
             .Hit
-            .Where( _ => attackWeight > 0)
+            .Where( flag => flag && attackWeight > 0)
             .Subscribe(_ =>
             {
                 _damagePoint.OnNext((int)attackWeight);

@@ -15,9 +15,13 @@ public class CubeController_A : MonoBehaviour
     {
         mouse = GetComponent<ObservableMouseTrigger>();
         mouse
-            .OnMouseOverAsObservable()
+            .OnMouseEnterAsObservable()
             .ThrottleFirst(TimeSpan.FromMilliseconds(invincibleTime),Scheduler.MainThread)
             .Subscribe(_ => _hit.OnNext(true))
+            .AddTo(this);
+        mouse
+            .OnMouseExitAsObservable()
+            .Subscribe(_ => _hit.OnNext(false))
             .AddTo(this);
     }
 
