@@ -5,11 +5,16 @@ using UnityEngine.UI;
 public class DamageView_A : MonoBehaviour
 {
     [SerializeField] private Text damageLog;
-    [SerializeReference] private MouseSlash _slash;
+    [SerializeReference] private MouseSlash_A _slash;
     
     // Start is called before the first frame update
     void Start()
     {
+        if (null == damageLog)
+            GameObject.Find("DamageLog").GetComponent<Text>();
+        if (null == _slash)
+            _slash = FindObjectOfType<MouseSlash_A>().GetComponent<MouseSlash_A>();
+        
         // Browse to the _slash. 
         _slash
             // When fired Damage.    
@@ -20,7 +25,6 @@ public class DamageView_A : MonoBehaviour
                 DisplayDamage(point);
             })
             .AddTo(this);
-
     }
 
     /// <summary>
