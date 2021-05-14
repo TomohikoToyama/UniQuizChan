@@ -1,5 +1,5 @@
 # Description
-This is Example for UniRx, UniTask, Extenject etx ...
+This is Example for UniRx, UniTask, Extenject etc ...
 
 
 # Dependencies
@@ -17,3 +17,11 @@ Copyright (c) 2010-2021 Modest Tree Media Inc. ZENJECT and EXTENJECT are a trade
 
 # Licence
 This project is licensed under the MIT License excluding third par
+
+
+# 説明
+ちゃお～～っ☆
+このプロジェクトはね、ここ最近トレンドになっているUniRxとかUniTaskとかExtenject(Zenject)とか
+その辺りのライブラリとかを使って、そこはかとない使用例でハンズオン的によしなにするプロジェクトだよ。
+画面の前のみんなも「完全に理解した」とか「何も分らん」とか良い感じに挑戦してみてね！！
+手探り感覚で気まぐれ更新していくので、声援や生温かいプルリクエストなど送って頂けると助かります。
