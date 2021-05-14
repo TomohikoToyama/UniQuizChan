@@ -30,21 +30,23 @@ public class CounterView_Q : MonoBehaviour
         if( null == _reduceButton) _reduceButton = GameObject.Find(UIName.ReduceButton.ToString()).GetComponent<Button>();
         if( null == _counterText) _counterText =GameObject.Find(UIName.CounterText.ToString()).GetComponent<Text>();
         
+        //ここから記述
+        #region Question
         // Addbuttonを参照
-        _addButton
+        
             // ボタンが押された時
-            .OnClickAsObservable()
+            
             // 購読して、addTriggerを発行する
-            .Subscribe(_ => addTrigger.OnNext(Unit.Default))
-            .AddTo(this);
+            
         
         // Browse to the Reducebutton
-        _reduceButton
+        
             // When the button is pressed
-            .OnClickAsObservable()
+            
             // Publish an event to be subscribed and executed
-            .Subscribe( _ => reduceTrigger.OnNext(Unit.Default))
-            .AddTo(this);
+           
+        #endregion
+        //ここまで
     }
 
     /// <summary>
