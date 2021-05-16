@@ -1,4 +1,5 @@
-﻿using UniRx;
+﻿using System;
+using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,7 @@ public class TimerView : MonoBehaviour
 
     [SerializeField] private Button startBtn;
     [SerializeField] private Text countText;
-    public IReactiveProperty<bool> IsStart => IsStart;
+    public IReactiveProperty<bool> IsStart => isStart;
     ReactiveProperty<bool> isStart = new ReactiveProperty<bool>();
     
     
@@ -19,7 +20,6 @@ public class TimerView : MonoBehaviour
 
         startBtn
             .OnClickAsObservable()
-            .Where( x => !isStart.Value)
             .Subscribe(_ =>
             {
                 isStart.Value = true;

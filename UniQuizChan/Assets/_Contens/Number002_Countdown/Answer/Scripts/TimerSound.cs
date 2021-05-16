@@ -8,8 +8,7 @@ public class TimerSound : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if( null == _source)
-            _source = gameObject.AddComponent<AudioSource>();
+        _source = GetComponent<AudioSource>();
         _source.playOnAwake = false;
         _source.clip = _clip;
     }
