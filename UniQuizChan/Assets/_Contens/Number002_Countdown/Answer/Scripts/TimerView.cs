@@ -8,8 +8,9 @@ public class TimerView : MonoBehaviour
 
     [SerializeField] private Button startBtn;
     [SerializeField] private Text countText;
-    public IReactiveProperty<bool> IsStart => isStart;
-    ReactiveProperty<bool> isStart = new ReactiveProperty<bool>();
+    [SerializeField] private Image mask;
+    public IObservable<bool> IsStart => isStart;
+    Subject<bool> isStart = new Subject<bool>();
     
     
     // Start is called before the first frame update
@@ -22,14 +23,21 @@ public class TimerView : MonoBehaviour
             .OnClickAsObservable()
             .Subscribe(_ =>
             {
-                isStart.Value = true;
-                startBtn.gameObject.SetActive(false);
+                isStart.OnNext(true);
             })
             .AddTo(this);
     }
 
     public void DisplayTimer(int num)
     {
+        if (num <= 0)
+            countText.text = $"Game Over";
+        else
         countText.text = $"Rest : {num} sec";
+    }
+    
+    public void ChangeButton(bool flg)
+    {
+       mask.gameObject.SetActive(flg);
     }
 }
