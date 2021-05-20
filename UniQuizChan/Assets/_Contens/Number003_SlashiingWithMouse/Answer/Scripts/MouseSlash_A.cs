@@ -5,42 +5,42 @@ using UniRx.Triggers;
 using UnityEngine;
 
 public class MouseSlash_A : MonoBehaviour
-{
-    public IObservable<int> Damage => _damagePoint; 
+{ 
+   public IObservable<int> Damage => _damagePoint;
    private Subject<int> _damagePoint = new Subject<int>();
-   [SerializeField] private CubeController_A _cubeController;
+   [SerializeField] private CubeController_A _cubeController; 
    float attackWeight;
-   
+    
+   // 1フレーム目の処理
    void Start()
     {
+        //Nullチェック
         if (null == _cubeController)
             _cubeController = FindObjectOfType<CubeController_A>().GetComponent<CubeController_A>();
         
-        var test = this.UpdateAsObservable()
-            .Where( input => Input.GetMouseButton (0))
-            .Subscribe( flg =>
-            {
-                if (null == Camera.main) return;
-                Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-                RaycastHit hit;
-                Physics.Raycast(ray, out hit, Mathf.Infinity);
-            });
-        
+        // 毎フレームマウスの位置を取得する
         var mousePositionAsObservable = this.UpdateAsObservable().Select(_ => Input.mousePosition);
-        mousePositionAsObservable.Buffer(2, 1).Select(mousePosition => mousePosition.First() - mousePosition.Last())
-            .DistinctUntilChanged().Where(_ =>  Input.GetMouseButton(0)).Subscribe(accel =>
-            {
-                attackWeight = Math.Abs(accel.x) + Math.Abs(accel.y);
-            })
+        
+        // マウスの位置を参照し
+        mousePositionAsObservable
+            // 2フレーム毎に1フレーム目の位置と2フレーム目の位置を比較し引く    
+            .Buffer(2, 1).Select(mousePosition => mousePosition.First() - mousePosition.Last())
+            // 前回と値が同じであれば読み込まず
+            .DistinctUntilChanged()
+            // マウスの左クリックが押されている時に
+            .Where(_ =>  Input.GetMouseButton(0))
+            // 購読し、xとyの絶対値を足してattackWeightに代入する。
+            .Subscribe(accel => attackWeight = Math.Abs(accel.x) + Math.Abs(accel.y) )
             .AddTo(this);
        
+        // _cubeControllerを参照する
         _cubeController
+            // Hitが発火した時    
             .Hit
+            // trueであり、attackWeightが0以上であれば
             .Where( flag => flag && attackWeight > 0)
-            .Subscribe(_ =>
-            {
-                _damagePoint.OnNext((int)attackWeight);
-            })
+            // 購読し、attackWeightの値を通知する
+            .Subscribe(_ => _damagePoint.OnNext((int)attackWeight) )
             .AddTo(this);
     }
 }
