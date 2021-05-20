@@ -10,20 +10,18 @@ public class DamageView_A : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Null チェック
         if (null == damageLog)
             GameObject.Find("DamageLog").GetComponent<Text>();
         if (null == _slash)
             _slash = FindObjectOfType<MouseSlash_A>().GetComponent<MouseSlash_A>();
         
-        // Browse to the _slash. 
+        // _slashを参照する. 
         _slash
-            // When fired Damage.    
+            // Damageが発火した時    
             .Damage
-            // Subscribe and excuete DisplayDamage.
-            .Subscribe(  point =>
-            {
-                DisplayDamage(point);
-            })
+            // 購読し、DisplayDamageを実行する.
+            .Subscribe(  point => DisplayDamage(point) )
             .AddTo(this);
     }
 
