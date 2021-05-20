@@ -13,29 +13,38 @@ public class TimerView : MonoBehaviour
     Subject<bool> isStart = new Subject<bool>();
     
     
-    // Start is called before the first frame update
+    // 1フレーム目に実行する処理
     void Start()
     {
         if (null == countText)
             countText = GetComponent<Text>();
 
+        //スタートボタンを参照
         startBtn
+            //ボタンが押されたら    
             .OnClickAsObservable()
-            .Subscribe(_ =>
-            {
-                isStart.OnNext(true);
-            })
+            //購読し、isStartにTrueを発行する
+            .Subscribe(_ => isStart.OnNext(true) )
             .AddTo(this);
     }
 
+    /// <summary>
+    /// 時間切れになったらゲームオーバー表示
+    /// 時間が残っているなら残り時間を表示
+    /// </summary>
+    /// <param name="num"></param>
     public void DisplayTimer(int num)
     {
         if (num <= 0)
             countText.text = $"Game Over";
         else
-        countText.text = $"Rest : {num} sec";
+            countText.text = $"Rest : {num} sec";
     }
     
+    /// <summary>
+    /// タイマーがスタートしたらボタンを見えなくする
+    /// </summary>
+    /// <param name="flg"></param>
     public void ChangeButton(bool flg)
     {
        mask.gameObject.SetActive(flg);
