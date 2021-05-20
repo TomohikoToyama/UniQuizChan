@@ -5,7 +5,7 @@ public class TimerSound : MonoBehaviour
     [SerializeField] private AudioClip _clip;
     private AudioSource _source;
     
-    // Start is called before the first frame update
+    // 最初の1フレーム目の処理
     void Start()
     {
         _source = GetComponent<AudioSource>();
@@ -13,6 +13,9 @@ public class TimerSound : MonoBehaviour
         _source.clip = _clip;
     }
 
+    /// <summary>
+    /// タイマーの音を再生する
+    /// </summary>
     public void PlaySE()
     {
         _source.Play();
